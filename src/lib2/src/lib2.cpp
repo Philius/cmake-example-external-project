@@ -3,5 +3,5 @@
 
 void lib2func()
 {
-  fprintf(stdout, "lib2func\n");
+    fprintf(stdout, "fprint within lib2func\n");
 }

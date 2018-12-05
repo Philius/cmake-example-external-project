@@ -2,6 +2,6 @@
 
 int main(int argc, char **argv)
 {
-  lib1func();
-  return 0;
+    lib1func();
+    return 0;
 }

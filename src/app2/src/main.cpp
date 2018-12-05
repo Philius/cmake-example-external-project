@@ -1,5 +1,7 @@
 
+#include "lib2/api.h"
 int main(int argc, char **argv)
 {
-  return 0;
+    lib2func();
+    return 0;
 }
