@@ -2,9 +2,9 @@
 #define LIB1API_HEADER
 
 #ifdef WIN32
-  #define LIB1_API __declspec(dllexport)
+#define LIB1_API __declspec(dllexport)
 #else
-  #define LIB1_API
+#define LIB1_API
 #endif
 
 LIB1_API void lib1func();
