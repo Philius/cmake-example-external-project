@@ -1,4 +1,5 @@
 include(ExternalProject)
+#include(FetchContent)
 
 # Builds external third party projects.
 # The parent script needs to define the "GLOBAL_OUTPUT_PATH" variable,
@@ -7,6 +8,16 @@ include(ExternalProject)
 ###############################################################################
 # HumbleLogging
 ###############################################################################
+# Use FetchContent to download and build the mylib package
+#FetchContent_Declare(
+#  HumbleLogging
+#  GIT_REPOSITORY "https://github.com/mfreiholz/humble-logging-library.git"
+#  GIT_TAG "master"
+#  #OVERRIDE_FIND_PACKAGE
+#  FIND_PACKAGE_ARGS NAMES HumbleLogging
+#)
+#FetchContent_MakeAvailable(HumbleLogging)
+#find_package(HumbleLogging REQUIRED)
 
 ExternalProject_Add(
   HumbleLogging
@@ -25,11 +36,11 @@ ExternalProject_Add(
 
 ExternalProject_Add_Step(
   HumbleLogging CopyToBin
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${GLOBAL_OUTPUT_PATH}/humblelogging/bin
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${GLOBAL_OUTPUT_PATH}/humblelogging/bin ${GLOBAL_OUTPUT_PATH}
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${GLOBAL_OUTPUT_PATH}/humblelogging/lib ${GLOBAL_OUTPUT_PATH}
   DEPENDEES install
 )
-
 set(HumbleLogging_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/3rdparty/humblelogging/include")
 set(HumbleLogging_LIBRARIES "${CMAKE_SHARED_LIBRARY_PREFIX}humblelogging${CMAKE_SHARED_LIBRARY_SUFFIX}")
 include_directories(${HumbleLogging_INCLUDE_DIRS})
